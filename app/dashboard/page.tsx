@@ -26,6 +26,7 @@ import {
   Users,
   X
 } from "lucide-react";
+import Image from "next/image";
 import { createClient } from "@/lib/supabase";
 import { formatCurrency, formatNumber, todayBogota } from "@/lib/format";
 import type {
@@ -612,7 +613,7 @@ export default function DashboardPage() {
       {/* Main content */}
       <section className="lg:ml-64">
         {/* Top header */}
-        <header className="sticky top-0 z-20 border-b border-soil-100/80 bg-[#f4f0e8]/90 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-7">
+        <header className="sticky top-0 z-20 border-b border-soil-100/80 bg-[#f4f6f9]/90 px-4 py-3 backdrop-blur-xl sm:px-6 lg:px-7">
           <div className="flex items-center justify-between gap-3">
             <div className="min-w-0">
               <p className="text-2xs font-bold uppercase tracking-[0.18em] text-leaf-600">
@@ -650,9 +651,9 @@ export default function DashboardPage() {
             <div
               className="mt-3 flex items-center gap-2 rounded-lg border px-3 py-2.5 text-sm font-medium"
               style={{
-                background: message.includes("error") || message.includes("Error") ? "#fef2f2" : "#f0f9f0",
-                borderColor: message.includes("error") || message.includes("Error") ? "#fca5a5" : "#b8e0b2",
-                color: message.includes("error") || message.includes("Error") ? "#b91c1c" : "#17371f"
+                background: message.includes("error") || message.includes("Error") ? "#fef2f2" : "#f0fdf4",
+                borderColor: message.includes("error") || message.includes("Error") ? "#fca5a5" : "#bbf7d0",
+                color: message.includes("error") || message.includes("Error") ? "#b91c1c" : "#14532d"
               }}
               role="status"
               aria-live="polite"
@@ -747,7 +748,7 @@ export default function DashboardPage() {
               style={{
                 minHeight: "56px",
                 color: isActive ? "#fff" : "rgba(255,255,255,0.5)",
-                background: isActive ? "rgba(67,139,74,0.2)" : "transparent"
+                background: isActive ? "rgba(37,99,235,0.25)" : "transparent"
               }}
               onClick={() => setTab(item.id)}
               aria-current={isActive ? "page" : undefined}
@@ -872,9 +873,9 @@ function HomeView({ summaries, totals, sales, chartData }: { summaries: ShedSumm
                   </div>
                 ))
               ) : (
-                <div className="flex items-center gap-2.5 rounded-lg bg-leaf-50 px-3 py-2.5">
-                  <span className="size-1.5 shrink-0 rounded-full bg-leaf-500" aria-hidden="true" />
-                  <p className="text-xs font-semibold text-leaf-700">Sin alertas de inventario bajo</p>
+                <div className="flex items-center gap-2.5 rounded-lg bg-mint-50 px-3 py-2.5">
+                  <span className="size-1.5 shrink-0 rounded-full bg-mint-500" aria-hidden="true" />
+                  <p className="text-xs font-semibold text-mint-700">Sin alertas de inventario bajo</p>
                 </div>
               )}
             </div>
@@ -1757,8 +1758,8 @@ function SalesChart({ data }: { data: { date: string; label: string; total: numb
                 style={{
                   height: `${height}px`,
                   background: day.total > 0
-                    ? `linear-gradient(to top, #2b6334, #438b4a)`
-                    : "#ebe6da"
+                    ? `linear-gradient(to top, #1d4ed8, #3b82f6)`
+                    : "#e5e9f0"
                 }}
               />
               {day.total > 0 ? (
@@ -1811,9 +1812,8 @@ function Splash({ text }: { text: string }) {
   return (
     <main className="grid min-h-dvh place-items-center px-4" style={{ background: "var(--bg)" }}>
       <div className="flex flex-col items-center gap-4">
-        <div className="grid size-16 place-items-center rounded-2xl bg-forest-950 text-white shadow-modal">
-          <Bird className="size-8" aria-hidden="true" />
-        </div>
+        <Image src="/logo.png" alt="" width={64} height={64} className="size-16 shrink-0 rounded-2xl object-cover shadow-modal" />
+
         <div className="flex items-center gap-3">
           <RefreshCw className="size-4 spin text-leaf-600" aria-hidden="true" />
           <p className="font-semibold text-soil-700">{text}</p>
@@ -1826,9 +1826,7 @@ function Splash({ text }: { text: string }) {
 function Brand() {
   return (
     <div className="flex items-center gap-3">
-      <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-leaf-600 text-white shadow-sm">
-        <Bird className="size-5" aria-hidden="true" />
-      </div>
+      <Image src="/logo.png" alt="" width={40} height={40} className="size-10 shrink-0 rounded-xl object-cover shadow-sm" />
       <div>
         <p className="font-display text-lg font-black leading-none text-white">Pollos</p>
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em]" style={{ color: "rgba(255,255,255,0.5)" }}>Galpones</p>
@@ -1865,7 +1863,7 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
   if (!summaries.length) {
     return (
       <div className="flex h-[280px] items-center justify-center rounded-xl"
-           style={{ background: "linear-gradient(160deg, #060e08, #0f2318)" }}>
+           style={{ background: "linear-gradient(160deg, #16223b, #223255)" }}>
         <div className="text-center">
           <div className="mx-auto mb-3 grid size-12 place-items-center rounded-xl bg-white/5">
             <Bird className="size-6 text-white/30" aria-hidden="true" />
@@ -1916,13 +1914,13 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
 
   /* Status palette */
   const PAL: Record<ShedStatus, { wallF: string; wallR: string; roofN: string; roofF: string; ridge: string; accent: string; dot: string }> = {
-    activo:  { wallF: "#1a3520", wallR: "#122518", roofN: "#3d8045", roofF: "#2b6334", ridge: "#17371f", accent: "#5aad62", dot: "#7dda87" },
-    pausado: { wallF: "#3a2810", wallR: "#281a08", roofN: "#d99145", roofF: "#bd6f28", ridge: "#7a3e10", accent: "#f5b060", dot: "#ffd080" },
-    cerrado: { wallF: "#282420", wallR: "#1c1816", roofN: "#6b5840", roofF: "#524027", ridge: "#3a3028", accent: "#8b7355", dot: "#a89070" },
+    activo:  { wallF: "#2f6b45", wallR: "#1e4a30", roofN: "#5fbf74", roofF: "#356e46", ridge: "#163420", accent: "#8fe6a0", dot: "#b6ffc4" },
+    pausado: { wallF: "#8a5722", wallR: "#6b4118", roofN: "#f0b25c", roofF: "#cb8a3c", ridge: "#4a2a0c", accent: "#ffcf8a", dot: "#ffe1a8" },
+    cerrado: { wallF: "#4f5560", wallR: "#383d47", roofN: "#96a1b0", roofF: "#666f7c", ridge: "#262a30", accent: "#aeb8c6", dot: "#ccd4de" },
   };
 
   return (
-    <div className="overflow-hidden rounded-xl" style={{ background: "linear-gradient(160deg, #050c06 0%, #091408 45%, #0f2318 100%)" }}>
+    <div className="overflow-hidden rounded-xl" style={{ background: "linear-gradient(160deg, #16223b 0%, #1b2947 45%, #223255 100%)" }}>
       <svg
         viewBox={`0 0 ${W_SVG} ${H_SVG}`}
         width="100%"
@@ -1936,8 +1934,8 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
             <feMerge><feMergeNode in="blur" /><feMergeNode in="SourceGraphic" /></feMerge>
           </filter>
           <linearGradient id="ground-grad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stopColor="#1a3520" stopOpacity="0.5" />
-            <stop offset="1" stopColor="#0f2318" stopOpacity="0.1" />
+            <stop offset="0" stopColor="#1e293b" stopOpacity="0.5" />
+            <stop offset="1" stopColor="#0b1220" stopOpacity="0.1" />
           </linearGradient>
         </defs>
 
@@ -2031,7 +2029,7 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
                 )}
 
                 {/* ── DOOR ── */}
-                <polygon points={poly(DL, DR, DTR, DTL)} fill="#030a04" />
+                <polygon points={poly(DL, DR, DTR, DTL)} fill="#050810" />
                 <line x1={DL[0]} y1={DL[1]} x2={DTL[0]} y2={DTL[1]}
                       stroke={pal.wallF} strokeWidth="0.6" opacity="0.5" />
                 {/* Door arch hint */}
@@ -2046,7 +2044,7 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
                   const WTL = P(wx,       gy, wZ + wH2);
                   return (
                     <polygon key={wi} points={poly(WL, WR, WTR, WTL)}
-                             fill="#071a0a" opacity="0.75" />
+                             fill="#0a1220" opacity="0.75" />
                   );
                 })}
 
@@ -2056,7 +2054,7 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
                   const B = P(gx + BW, v.y1, v.z0);
                   const C = P(gx + BW, v.y1, v.z1);
                   const D = P(gx + BW, v.y0, v.z1);
-                  return <polygon key={vi} points={poly(A, B, C, D)} fill="#040f07" opacity="0.6" />;
+                  return <polygon key={vi} points={poly(A, B, C, D)} fill="#070c16" opacity="0.6" />;
                 })}
 
                 {/* ── ROOF ── */}
@@ -2122,10 +2120,10 @@ function ShedMap({ summaries }: { summaries: ShedSummary[] }) {
 
 function Kpi({ icon: Icon, label, value, tone }: { icon: typeof BarChart3; label: string; value: string; tone: string }) {
   const config: Record<string, { bg: string; iconBg: string; iconColor: string; border: string; valueColor: string }> = {
-    leaf:   { bg: "bg-kpi-green",  iconBg: "bg-leaf-700",  iconColor: "text-white",     border: "border-l-leaf-500",   valueColor: "text-leaf-900"  },
+    leaf:   { bg: "bg-kpi-green",  iconBg: "bg-mint-700",  iconColor: "text-white",     border: "border-l-mint-500",   valueColor: "text-mint-900"  },
     soil:   { bg: "bg-kpi-soil",   iconBg: "bg-soil-900",  iconColor: "text-white",     border: "border-l-soil-700",   valueColor: "text-soil-900"  },
     money:  { bg: "bg-kpi-amber",  iconBg: "bg-ember-500", iconColor: "text-white",     border: "border-l-ember-500",  valueColor: "text-soil-900"  },
-    profit: { bg: "bg-kpi-profit", iconBg: "bg-leaf-500",  iconColor: "text-white",     border: "border-l-leaf-600",   valueColor: "text-leaf-900"  }
+    profit: { bg: "bg-kpi-profit", iconBg: "bg-mint-500",  iconColor: "text-white",     border: "border-l-mint-600",   valueColor: "text-mint-900"  }
   };
   const c = config[tone] ?? config.soil;
   return (

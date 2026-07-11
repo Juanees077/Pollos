@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { ArrowLeft, Bird, CheckCircle2, Mail, RefreshCw } from "lucide-react";
+import { ArrowLeft, CheckCircle2, Mail, RefreshCw } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 
@@ -39,9 +40,7 @@ export default function ForgotPasswordPage() {
       <div className="w-full max-w-[400px]">
         {/* Logo */}
         <div className="mb-6 flex items-center gap-3">
-          <div className="grid size-10 place-items-center rounded-xl bg-leaf-700 text-white shadow-button">
-            <Bird className="size-5" aria-hidden="true" />
-          </div>
+          <Image src="/logo.png" alt="" width={40} height={40} className="size-10 shrink-0 rounded-full object-cover shadow-button" />
           <div>
             <p className="text-2xs font-bold uppercase tracking-[0.2em] text-leaf-700">Sistema Pollos</p>
             <p className="font-display text-lg font-black text-soil-900">Recuperar acceso</p>
@@ -51,8 +50,8 @@ export default function ForgotPasswordPage() {
         <div className="panel rounded-2xl p-6 sm:p-8">
           {success ? (
             <div className="space-y-5 text-center">
-              <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-leaf-50">
-                <CheckCircle2 className="size-7 text-leaf-700" aria-hidden="true" />
+              <div className="mx-auto grid size-14 place-items-center rounded-2xl bg-mint-50">
+                <CheckCircle2 className="size-7 text-mint-700" aria-hidden="true" />
               </div>
               <div>
                 <h1 className="font-display text-xl font-black text-soil-900">Correo enviado</h1>
@@ -84,7 +83,7 @@ export default function ForgotPasswordPage() {
                     <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-leaf-600" aria-hidden="true" />
                     <input
                       id="email"
-                      className="field-input pl-10"
+                      className="field-input !pl-10"
                       type="email"
                       autoComplete="email"
                       required

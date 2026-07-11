@@ -19,13 +19,17 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   title: "Sistema Pollos · Galpones",
-  description: "Sistema web para administrar galpones, ventas, inventario y utilidad de pollos."
+  description: "Sistema web para administrar galpones, ventas, inventario y utilidad de pollos.",
+  icons: {
+    icon: "/logo.png",
+    apple: "/logo.png"
+  }
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0f2318"
+  themeColor: "#0b1220"
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -1,7 +1,8 @@
 "use client";
 
 import { FormEvent, useMemo, useState } from "react";
-import { Bird, Eye, EyeOff, Lock, Mail, RefreshCw, TrendingUp, Users, Warehouse } from "lucide-react";
+import { Eye, EyeOff, Lock, Mail, RefreshCw, TrendingUp, Users, Warehouse } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase";
 
@@ -60,21 +61,32 @@ export default function LoginPage() {
     <main className="flex min-h-dvh" aria-label="Inicio de sesión">
       {/* ── Left hero panel (hidden on mobile) ── */}
       <div
-        className="hidden lg:flex lg:w-[480px] xl:w-[540px] shrink-0 flex-col justify-between p-10 xl:p-14"
+        className="relative hidden lg:flex lg:w-[480px] xl:w-[540px] shrink-0 flex-col overflow-hidden p-10 xl:p-14"
         style={{ background: "var(--sidebar-bg)" }}
         aria-hidden="true"
       >
+        {/* Decorative background */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage:
+              "radial-gradient(ellipse 60% 45% at 85% 8%, rgba(59,130,246,0.22) 0%, transparent 65%)," +
+              "radial-gradient(ellipse 55% 40% at 5% 95%, rgba(37,99,235,0.16) 0%, transparent 60%)," +
+              "linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px)," +
+              "linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)",
+            backgroundSize: "auto, auto, 32px 32px, 32px 32px"
+          }}
+        />
+
         {/* Brand */}
-        <div className="flex items-center gap-3">
-          <div className="grid size-10 place-items-center rounded-lg bg-leaf-700/40 text-white">
-            <Bird className="size-5" />
-          </div>
+        <div className="relative z-10 flex items-center gap-3">
+          <Image src="/logo.png" alt="" width={40} height={40} className="size-10 shrink-0 rounded-full object-cover shadow-sm" />
           <span className="text-sm font-bold uppercase tracking-[0.2em] text-white/70">Sistema Pollos</span>
         </div>
 
         {/* Headline */}
-        <div>
-          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-leaf-500">Gestión avícola</p>
+        <div className="relative z-10 my-auto py-16">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-leaf-400">Gestión avícola</p>
           <h1 className="font-display text-4xl xl:text-5xl font-black leading-[1.1] text-white">
             Tus galpones,<br />bajo control.
           </h1>
@@ -85,7 +97,10 @@ export default function LoginPage() {
           <ul className="mt-10 space-y-5">
             {FEATURES.map(({ icon: Icon, label, desc }) => (
               <li key={label} className="flex items-start gap-4">
-                <div className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg" style={{ background: "rgba(67,139,74,0.18)" }}>
+                <div
+                  className="mt-0.5 grid size-9 shrink-0 place-items-center rounded-lg border"
+                  style={{ background: "rgba(59,130,246,0.16)", borderColor: "rgba(59,130,246,0.25)" }}
+                >
                   <Icon className="size-4 text-leaf-400" />
                 </div>
                 <div>
@@ -98,7 +113,7 @@ export default function LoginPage() {
         </div>
 
         {/* Footer */}
-        <p className="text-xs text-white/25">© {new Date().getFullYear()} Sistema Pollos · Todos los derechos reservados</p>
+        <p className="relative z-10 text-xs text-white/25">© {new Date().getFullYear()} Sistema Pollos · Todos los derechos reservados</p>
       </div>
 
       {/* ── Right form panel ── */}
@@ -106,9 +121,7 @@ export default function LoginPage() {
         <div className="w-full max-w-[420px]">
           {/* Mobile-only logo */}
           <div className="mb-8 flex items-center gap-3 lg:hidden">
-            <div className="grid size-11 place-items-center rounded-xl bg-leaf-700 text-white shadow-button">
-              <Bird className="size-5" aria-hidden="true" />
-            </div>
+            <Image src="/logo.png" alt="" width={44} height={44} className="size-11 shrink-0 rounded-full object-cover shadow-button" />
             <div>
               <p className="text-2xs font-bold uppercase tracking-[0.2em] text-leaf-700">Sistema Pollos</p>
               <p className="font-display text-2xl font-black text-soil-900">Galpones bajo control</p>
@@ -155,7 +168,7 @@ export default function LoginPage() {
                   <Mail className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-leaf-600" aria-hidden="true" />
                   <input
                     id="email"
-                    className="field-input pl-10"
+                    className="field-input !pl-10"
                     type="email"
                     autoComplete="email"
                     required
@@ -173,7 +186,7 @@ export default function LoginPage() {
                   <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-leaf-600" aria-hidden="true" />
                   <input
                     id="password"
-                    className="field-input pl-10 pr-12"
+                    className="field-input !pl-10 !pr-12"
                     type={showPassword ? "text" : "password"}
                     autoComplete={mode === "login" ? "current-password" : "new-password"}
                     minLength={6}
@@ -198,7 +211,7 @@ export default function LoginPage() {
                 <p
                   className={`rounded-lg px-3 py-2.5 text-sm leading-snug ${
                     msgType === "success"
-                      ? "border border-leaf-200 bg-leaf-50 text-leaf-900"
+                      ? "border border-mint-200 bg-mint-50 text-mint-900"
                       : "border border-red-200 bg-red-50 text-red-800"
                   }`}
                   role="alert"
@@ -233,7 +246,7 @@ export default function LoginPage() {
           </div>
 
           <p className="mt-5 text-center text-xs text-soil-500">
-            Sistema de gestión avícola · Datos protegidos con Supabase
+            Sistema de gestión avícola
           </p>
         </div>
       </div>
